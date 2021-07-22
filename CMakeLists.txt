@@ -8,6 +8,19 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/C4STL/src")
 
-set(C4STL_FILES "${C4STL_SOURCE_FILES}" "${C4STL_HEADER_FILES}" CACHE INTERNAL "" FORCE)
+set(
+	C4STL_FILES 
+	"${C4STL_SOURCE_FILES}" 
+	"${C4STL_HEADER_FILES}" 
+	CACHE INTERNAL "" FORCE
+	)
 
-add_library(C4STL SHARED "${C4STL_FILES}")
+add_library(
+	C4STL 
+	SHARED 
+	"${C4STL_FILES}"
+	)
+
+target_include_directories(C4STL PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/C4STL/src")
+
+target_compile_definitions(C4STL PRIVATE __C4STL_BUILD)
