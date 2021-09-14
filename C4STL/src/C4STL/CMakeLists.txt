@@ -2,6 +2,7 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Core")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Math")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Containers")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Processing")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Exceptions")
 
 set(
 	C4STL_SOURCES 
@@ -9,6 +10,7 @@ set(
 	"${C4STL_MATH_SOURCES}" 
 	"${C4STL_CONTAINERS_SOURCES}" 
 	"${C4STL_PROCESSING_SOURCES}" 
+	"${C4STL_EXCEPTIONS_SOURCES}" 
 	CACHE INTERNAL "" FORCE
 	)
 
@@ -18,5 +20,6 @@ set(
 	"${C4STL_MATH_HEADERS}" 
 	"${C4STL_CONTAINERS_HEADERS}" 
 	"${C4STL_PROCESSING_HEADERS}" 
+	"${C4STL_EXCEPTIONS_HEADERS}" 
 	CACHE INTERNAL "" FORCE
 	)
