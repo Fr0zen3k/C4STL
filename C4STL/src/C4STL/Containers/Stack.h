@@ -9,7 +9,6 @@
 
 #include "C4STL/Core/Core.h"
 
-
 namespace C4STL {
 
 	template<typename __TYPE>
@@ -21,8 +20,8 @@ namespace C4STL {
 		inline size_t Size() const C4STL_NOEXCEPT { return m_Last; }
 
 		void Push(const __TYPE& value) C4STL_NOEXCEPT;
-		__TYPE Pull() const C4STL_NOEXCEPT;
-		__TYPE& Peek() C4STL_NOEXCEPT;
+		__TYPE Pull() const;
+		__TYPE& Peek();
 
 		bool Empty() C4STL_NOEXCEPT;
 

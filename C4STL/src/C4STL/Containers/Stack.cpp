@@ -1,4 +1,5 @@
 #include "Stack.h"
+#include "C4STL/Exceptions/StackEmptyException.h"
 
 namespace C4STL {
 
@@ -27,14 +28,22 @@ namespace C4STL {
 	}
 
 	template<typename __TYPE>
-	__TYPE Stack<__TYPE>::Pull() const C4STL_NOEXCEPT {
-		// Add size checking
+	__TYPE Stack<__TYPE>::Pull() const {
+		if(Empty())
+		{
+			throw StackEmptyException<__TYPE>(this);
+		}
+		
 		return m_Data[m_Last - 1];
 	}
 
 	template<typename __TYPE>
-	__TYPE& Stack<__TYPE>::Peek() C4STL_NOEXCEPT {
-		// Add size checking
+	__TYPE& Stack<__TYPE>::Peek() {
+		if (Empty())
+		{
+			throw StackEmptyException<__TYPE>(this);
+		}
+		
 		return m_Data[m_Last - 1];
 	}
 

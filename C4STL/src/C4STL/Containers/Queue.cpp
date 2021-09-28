@@ -1,4 +1,5 @@
 #include "Queue.h"
+#include "C4STL/Exceptions/QueueEmptyException.h"
 
 namespace C4STL {
 
@@ -36,15 +37,25 @@ namespace C4STL {
 	}
 
 	template<typename __TYPE>
-	__TYPE Queue<__TYPE>::Pull() const C4STL_NOEXCEPT {
+	__TYPE Queue<__TYPE>::Pull() const {
+		if(Empty())
+		{
+			throw QueueEmptyException<__TYPE>(this);
+		}
+		
 		size_t index = m_First++;
 		m_First %= m_BufferSize;
 		return m_Data[index];
 	}
 
 	template<typename __TYPE>
-	__TYPE& Queue<__TYPE>::Peek() C4STL_NOEXCEPT {
-		return m_Data[m_First;]
+	__TYPE& Queue<__TYPE>::Peek() {
+		if(Empty())
+		{
+			throw QueueEmptyException<__TYPE>(this);
+		}
+		
+		return m_Data[m_First];
 	}
 
 }

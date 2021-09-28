@@ -18,13 +18,13 @@ namespace C4STL {
 
 		virtual size_t Size() const C4STL_NOEXCEPT = 0;
 		
-		virtual __TYPE* Data() C4STL_NOEXCEPT = 0;
+		virtual __TYPE* Data() = 0;
 
-		virtual __TYPE& Front() C4STL_NOEXCEPT = 0;
-		virtual __TYPE& Back() C4STL_NOEXCEPT = 0;
-		virtual __TYPE& At(size_t index) C4STL_NOEXCEPT = 0;
+		virtual __TYPE& Front() = 0;
+		virtual __TYPE& Back() = 0;
+		virtual __TYPE& At(size_t index) = 0;
 
-		virtual __TYPE& operator [] (size_t index) C4STL_NOEXCEPT = 0;
+		virtual __TYPE& operator [] (size_t index) = 0;
 	};
 
 }

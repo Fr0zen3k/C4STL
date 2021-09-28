@@ -20,8 +20,8 @@ namespace C4STL {
 		size_t Size() const C4STL_NOEXCEPT;
 
 		void Push(const __TYPE& value) C4STL_NOEXCEPT;
-		__TYPE Pull() const C4STL_NOEXCEPT;
-		__TYPE& Peek() C4STL_NOEXCEPT;
+		__TYPE Pull() const;
+		__TYPE& Peek();
 
 		inline bool Empty() const C4STL_NOEXCEPT { return Size() == 0; }
 

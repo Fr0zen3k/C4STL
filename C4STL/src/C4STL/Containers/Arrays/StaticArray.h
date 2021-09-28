@@ -17,18 +17,18 @@ namespace C4STL
 	template<typename __TYPE, size_t __SIZE>
 	class C4STL_PUBLIC_API StaticArray : public Array<__TYPE> {
 	public:
-		StaticArray() C4STL_NOEXCEPT;
+		StaticArray();
 		virtual ~StaticArray() C4STL_NOEXCEPT override;
 
 		inline virtual size_t Size() const C4STL_NOEXCEPT override { return __SIZE; };
 
-		virtual __TYPE* Data() C4STL_NOEXCEPT override;
+		virtual __TYPE* Data() override;
 		
-		virtual __TYPE& Front() C4STL_NOEXCEPT override;
-		virtual __TYPE& Back() C4STL_NOEXCEPT override;
-		virtual __TYPE& At(size_t index) C4STL_NOEXCEPT override;
+		virtual __TYPE& Front() override;
+		virtual __TYPE& Back() override;
+		virtual __TYPE& At(size_t index) override;
 
-		virtual __TYPE& operator [] (size_t index) C4STL_NOEXCEPT override;
+		virtual __TYPE& operator [] (size_t index) override;
 
 	private:
 		__TYPE m_Data[__SIZE];
