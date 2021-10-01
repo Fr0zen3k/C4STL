@@ -25,6 +25,16 @@ namespace C4STL
 		delete[] m_Data;
 	}
 
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator DynamicArray<__TYPE>::begin() {
+        return Iterator(m_Data);
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator DynamicArray<__TYPE>::end() {
+        return Iterator(&m_Data[m_Size]);
+    }
+
 	template<typename __TYPE>
 	__TYPE* DynamicArray<__TYPE>::Data()
 	{
@@ -106,4 +116,203 @@ namespace C4STL
 		
 		return m_Data[index];
 	}
+
+    // *********************************** Iterator ***********************************
+
+    template<typename __TYPE>
+    DynamicArray<__TYPE>::Iterator::Iterator(__TYPE *ptr) C4STL_NOEXCEPT : C4STL::Iterator<__TYPE>(), m_Ptr(ptr) {}
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::advance(const DynamicArray::Iterator &iterator) {
+        int32_t dif = iterator.m_Ptr - m_Data;
+        m_Ptr += dif * sizeof(__TYPE);
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::advance(const size_t &position) {
+        m_Ptr += position * sizeof(__TYPE);
+        return *this;
+    }
+
+    template<typename __TYPE>
+    int32_t DynamicArray<__TYPE>::Iterator::distance(const DynamicArray::Iterator &iterator) {
+        return iterator.m_Ptr - m_Ptr;
+    }
+
+    template<typename __TYPE>
+    int32_t DynamicArray<__TYPE>::Iterator::distance(const size_t &position) {
+        return &m_Data[position] - m_Ptr;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::previous(const DynamicArray::Iterator &iterator) {
+        m_Ptr = iterator.m_Ptr - sizeof(__TYPE);
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::previous(const size_t &position) {
+        // TODO: check if position == 0
+
+        m_Ptr = &m_Data[position - 1];
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::next(const DynamicArray::Iterator &iterator) {
+        m_Ptr = iterator.m_Ptr;
+        m_Ptr++;
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::next(const size_t &position) {
+        m_Ptr = &m_Data[position + 1];
+        return *this;
+    }
+
+    template<typename __TYPE>
+    __TYPE &DynamicArray<__TYPE>::Iterator::operator*() {
+        return *m_Ptr;
+    }
+
+    template<typename __TYPE>
+    __TYPE *DynamicArray<__TYPE>::Iterator::operator->() {
+        return m_Ptr;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator++() {
+        m_Ptr++;
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator++(int) {
+        DynamicArray<__TYPE>::Iterator temp(m_Ptr++);
+        return temp;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator--() {
+        m_Ptr--;
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator--(int) {
+        DynamicArray<__TYPE>::Iterator temp(m_Ptr--);
+        return temp;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator+(const DynamicArray::Iterator &iterator) {
+        int32_t dif = iterator.m_Ptr - m_Ptr;
+        m_Ptr += dif * sizeof(__TYPE);
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator-(const DynamicArray::Iterator &iterator) {
+        int32_t dif = m_Ptr - iterator.m_Ptr;
+        m_Ptr -= dif * sizeof(__TYPE);
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator+(const size_t &position) {
+        int dif = &m_Data[position] - m_Ptr;
+        m_Ptr += dif * sizeof(__TYPE);
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator-(const size_t &position) {
+        int32_t dif = m_Ptr - &m_Data[position];
+        m_Ptr -= dif * sizeof(__TYPE);
+        return *this;
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator+=(const DynamicArray::Iterator &iterator) {
+        return operator+(iterator);
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator+=(const size_t &position) {
+        return operator+(position);
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator-=(const DynamicArray::Iterator &iterator) {
+        return operator-(iterator);
+    }
+
+    template<typename __TYPE>
+    typename DynamicArray<__TYPE>::Iterator &DynamicArray<__TYPE>::Iterator::operator-=(const size_t &position) {
+        return operator-(position);
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator<(const DynamicArray::Iterator &iterator) {
+        return m_Ptr < iterator.m_Ptr;
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator<(const size_t &position) {
+        return m_Ptr < &m_Data[position];
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator>(const DynamicArray::Iterator &iterator) {
+        return m_Ptr > iterator.m_Ptr;
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator>(const size_t &position) {
+        return m_Ptr > &m_Data[position];
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator<=(const DynamicArray::Iterator &iterator) {
+        return m_Ptr <= iterator.m_Ptr;
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator<=(const size_t &position) {
+        return m_Ptr <= &m_Data[position];
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator>=(const DynamicArray::Iterator &iterator) {
+        return m_Ptr >= iterator.m_Ptr;
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator>=(const size_t &position) {
+        return m_Ptr >= &m_Data[position];
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator==(const DynamicArray::Iterator &iterator) {
+        return m_Ptr == iterator.m_Ptr;
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator==(const size_t &position) {
+        return m_Ptr == &m_Data[position];
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator!=(const DynamicArray::Iterator &iterator) {
+        return m_Ptr != iterator.m_Ptr;
+    }
+
+    template<typename __TYPE>
+    bool DynamicArray<__TYPE>::Iterator::operator!=(const size_t &position) {
+        return m_Ptr != &m_Data[position];
+    }
+
+
 }

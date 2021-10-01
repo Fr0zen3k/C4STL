@@ -8,13 +8,18 @@
 #define C4STL_ARRAY_H
 
 #include "C4STL/Core/Core.h"
+#include "C4STL/Containers/Iterators/Iterable.h"
+#include "C4STL/Containers/Iterators/Iterator.h"
 
 namespace C4STL {
 
 	template<typename __TYPE>
-	class C4STL_PUBLIC_API Array {
+    class C4STL_PUBLIC_API Array : public Iterable<__TYPE> {
 	public:
 		virtual ~Array() C4STL_NOEXCEPT {};
+
+        virtual Iterator<__TYPE> begin() = 0;
+        virtual Iterator<__TYPE> end() = 0;
 
 		virtual size_t Size() const C4STL_NOEXCEPT = 0;
 		
