@@ -1,0 +1,3 @@
+[submodule "C4STL/vendor/LinkCL"]
+	path = C4STL/vendor/LinkCL
+	url = https://github.com/Fr0zen3k/LinkCL.git

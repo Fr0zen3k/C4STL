@@ -49,9 +49,9 @@ namespace C4STL {
         virtual __TYPE* operator -> () = 0;
 
         virtual Iterator<__TYPE>& operator ++ () = 0;
-        virtual Iterator<__TYPE>& operator ++ (int) = 0;
+        virtual const Iterator<__TYPE> operator ++ (int) = 0;
         virtual Iterator<__TYPE>& operator -- () = 0;
-        virtual Iterator<__TYPE>& operator -- (int) = 0;
+        virtual const Iterator<__TYPE> operator -- (int) = 0;
 
         virtual Iterator<__TYPE>& operator + (const Iterator<__TYPE>& iterator) = 0;
         virtual Iterator<__TYPE>& operator - (const Iterator<__TYPE>& iterator) = 0;

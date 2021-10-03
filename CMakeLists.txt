@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/C4STL/src")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/C4STL/vendor/LinkCL")
 
 set(
 	C4STL_FILES 
@@ -20,6 +21,8 @@ add_library(
 	SHARED 
 	"${C4STL_FILES}"
 	)
+
+target_link_libraries(C4STL PUBLIC LinkCL)
 
 target_include_directories(C4STL PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/C4STL/src")
 

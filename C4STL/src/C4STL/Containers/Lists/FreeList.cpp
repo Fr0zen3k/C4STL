@@ -90,5 +90,7 @@ namespace C4STL {
         delete[] mem;
         m_Size -= m_SizeChunks[index];
         m_SizeChunks.Delete(index);
+
+        auto test = m_SizeChunks.begin();
     }
 }
