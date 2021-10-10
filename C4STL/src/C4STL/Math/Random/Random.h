@@ -23,8 +23,8 @@ namespace C4STL
 
 			uint32_t Random() C4STL_NOEXCEPT;
 
-			inline uint32_t Minimum() C4STL_NOEXCEPT { return 0; }
-			inline uint32_t Maximum() C4STL_NOEXCEPT { return 0xFFFFFFFF; }
+			static inline uint32_t Minimum() C4STL_NOEXCEPT { return 0; }
+			static inline uint32_t Maximum() C4STL_NOEXCEPT { return 0xFFFFFFFF; }
 
 			void Reseed(uint32_t seed = static_cast<uint32_t>(time(NULL))) C4STL_NOEXCEPT;
 

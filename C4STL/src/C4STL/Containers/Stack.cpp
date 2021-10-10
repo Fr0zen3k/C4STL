@@ -28,7 +28,7 @@ namespace C4STL {
 	}
 
 	template<typename __TYPE>
-	__TYPE Stack<__TYPE>::Pull() const {
+	__TYPE Stack<__TYPE>::Pop() const {
 		if(Empty())
 		{
 			throw StackEmptyException<__TYPE>(this);

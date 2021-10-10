@@ -17,10 +17,10 @@ namespace C4STL {
 		Stack() C4STL_NOEXCEPT;
 		virtual ~Stack() C4STL_NOEXCEPT;
 
-		inline size_t Size() const C4STL_NOEXCEPT { return m_Last; }
+		C4STL_NODISCARD inline size_t Size() const C4STL_NOEXCEPT { return m_Last; }
 
 		void Push(const __TYPE& value) C4STL_NOEXCEPT;
-		__TYPE Pull() const;
+		__TYPE Pop() const;
 		__TYPE& Peek();
 
 		bool Empty() C4STL_NOEXCEPT;

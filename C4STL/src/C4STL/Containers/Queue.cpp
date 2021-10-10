@@ -37,7 +37,7 @@ namespace C4STL {
 	}
 
 	template<typename __TYPE>
-	__TYPE Queue<__TYPE>::Pull() const {
+	__TYPE Queue<__TYPE>::Pop() const {
 		if(Empty())
 		{
 			throw QueueEmptyException<__TYPE>(this);

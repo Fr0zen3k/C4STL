@@ -4,8 +4,8 @@
 #pragma warning(disable: 4251)
 #endif
 
-#ifndef C4STL_STACK_H
-#define C4STL_STACK_H
+#ifndef C4STL_QUEUE_H
+#define C4STL_QUEUE_H
 
 #include "C4STL/Core/Core.h"
 
@@ -17,13 +17,13 @@ namespace C4STL {
 		Queue() C4STL_NOEXCEPT;
 		virtual ~Queue() C4STL_NOEXCEPT;
 
-		size_t Size() const C4STL_NOEXCEPT;
+		C4STL_NODISCARD size_t Size() const C4STL_NOEXCEPT;
 
 		void Push(const __TYPE& value) C4STL_NOEXCEPT;
-		__TYPE Pull() const;
+		__TYPE Pop() const;
 		__TYPE& Peek();
 
-		inline bool Empty() const C4STL_NOEXCEPT { return Size() == 0; }
+		C4STL_NODISCARD inline bool Empty() const C4STL_NOEXCEPT { return Size() == 0; }
 
 	private:
 		__TYPE* m_Data;

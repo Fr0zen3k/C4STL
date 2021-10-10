@@ -1,5 +1,8 @@
 #include "Distribution.h"
 
+#include <cmath>
+
+
 namespace C4STL
 {
 	namespace Random
@@ -26,6 +29,13 @@ namespace C4STL
 			return 0.0f;
 		}
 
+        float UniformDistribution::GetPDF(int32_t value) const C4STL_NOEXCEPT {
+            return 1.0f / (m_Delta - 1);
+        }
+
+        float UniformDistribution::GetCDF(int32_t value) const C4STL_NOEXCEPT {
+
+        }
 
 
 		// :::::::::::::::::::::::::::::: BINOMIAL DISTRIBUTION :::::::::::::::::::::::::::::::::
@@ -50,6 +60,13 @@ namespace C4STL
 			return 0.0f;
 		}
 
+        float BinomialDistribution::GetPDF(int32_t value) const C4STL_NOEXCEPT {
+            return BinomialCoefficient(m_NumberOfTrys, value) * pow(m_Probability, value) * pow(1.0f - m_Probability, m_NumberOfTrys - value);
+        }
+
+        float BinomialDistribution::GetCDF(int32_t value) const C4STL_NOEXCEPT {
+
+        }
 
 
 		// :::::::::::::::::::::::::::::: POISSON DISTRIBUTION ::::::::::::::::::::::::::::::::::
@@ -74,6 +91,13 @@ namespace C4STL
 			return 0.0f;
 		}
 
+        float PoissonDistribution::GetPDF(int32_t value) const C4STL_NOEXCEPT {
+            return pow(m_Lambda, value) * exp(-m_Lambda) / tgamma(value + 1);
+        }
+
+        float PoissonDistribution::GetCDF(int32_t value) const C4STL_NOEXCEPT {
+
+        }
 
 
 		// :::::::::::::::::::::::::::::: EXPONENTIAL DISTRIBUTION ::::::::::::::::::::::::::::::
@@ -98,6 +122,13 @@ namespace C4STL
 			return 0.0f;
 		}
 
+        float ExponentialDistribution::GetPDF(float value) const C4STL_NOEXCEPT {
+            return m_Lambda * exp(-1.0f * m_Lambda * value);
+        }
+
+        float ExponentialDistribution::GetCDF(float value) const C4STL_NOEXCEPT {
+            return 1.0f - exp(-1.0f * m_Lambda * value);
+        }
 
 
 		// :::::::::::::::::::::::::::::: NORMAL DISTRIBUTION :::::::::::::::::::::::::::::::::::
@@ -122,6 +153,13 @@ namespace C4STL
 			return 0.0f;
 		}
 
+        float NormalDistribution::GetPDF(float value) const C4STL_NOEXCEPT {
+            return exp(-0.5f * pow((value - m_Mean) / m_StandardDeviation, 2)) / (m_StandardDeviation * sqrt(2.0f * M_PI));
+        }
+
+        float NormalDistribution::GetCDF(float value) const C4STL_NOEXCEPT {
+
+        }
 
 
 		// :::::::::::::::::::::::::::::: STUDENT DISTRIBUTION ::::::::::::::::::::::::::::::::::
@@ -146,6 +184,13 @@ namespace C4STL
 			return 0.0f;
 		}
 
+        float StudentDistribution::GetPDF(float value) const C4STL_NOEXCEPT {
+
+        }
+
+        float StudentDistribution::GetCDF(float value) const C4STL_NOEXCEPT {
+
+        }
 
 
 		// :::::::::::::::::::::::::::::: BERNOULLI DISTRIBUTION ::::::::::::::::::::::::::::::::
@@ -170,6 +215,14 @@ namespace C4STL
 			return 0.0f;
 		}
 
+        float BernoulliDistribution::GetPDF(uint32_t value) const C4STL_NOEXCEPT {
+
+        }
+
+        float BernoulliDistribution::GetCDF(uint32_t value) const C4STL_NOEXCEPT {
+
+        }
+
 
 
 		// :::::::::::::::::::::::::::::: CHI-SQUARED DISTRIBUTION ::::::::::::::::::::::::::::::
@@ -193,6 +246,14 @@ namespace C4STL
 		{
 			return 0.0f;
 		}
+
+        float ChiSquaredDistribution::GetPDF(float value) const C4STL_NOEXCEPT {
+
+        }
+
+        float ChiSquaredDistribution::GetCDF(float value) const C4STL_NOEXCEPT {
+
+        }
 
 	}
 

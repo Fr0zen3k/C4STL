@@ -48,11 +48,14 @@ namespace C4STL
 
 			virtual __TYPE Random() const C4STL_NOEXCEPT = 0;
 			virtual float Probability(__TYPE value) const C4STL_NOEXCEPT = 0;
+
+            virtual float GetPDF(__TYPE value) const C4STL_NOEXCEPT = 0;
+            virtual float GetCDF(__TYPE value) const C4STL_NOEXCEPT = 0;
 		};
 
 #define C4STL_DEFINE_DISTRIBUTION_CLASSIFICATION(distribution, classification)													\
-inline static DistributionType GetStaticType() C4STL_NOEXCEPT { return DistributionType::##distribution; }						\
-inline static DistributionClass GetStaticClass() C4STL_NOEXCEPT { return DistributionClass::##classification; }					\
+inline static DistributionType GetStaticType() C4STL_NOEXCEPT { return DistributionType::distribution; }						\
+inline static DistributionClass GetStaticClass() C4STL_NOEXCEPT { return DistributionClass::classification; }					\
 inline virtual DistributionType GetType() const C4STL_NOEXCEPT override { return GetStaticType(); }								\
 inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { return GetStaticClass(); }
 
@@ -66,6 +69,9 @@ inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { retu
 
 			virtual int32_t Random() const C4STL_NOEXCEPT override;
 			virtual float Probability(int32_t x) const C4STL_NOEXCEPT override;
+
+            virtual float GetPDF(int32_t value) const C4STL_NOEXCEPT override;
+            virtual float GetCDF(int32_t value) const C4STL_NOEXCEPT override;
 
 		private:
 			int m_Lower;
@@ -83,6 +89,20 @@ inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { retu
 			virtual int32_t Random() const C4STL_NOEXCEPT override;
 			virtual float Probability(int32_t occurences) const C4STL_NOEXCEPT override;
 
+            virtual float GetPDF(int32_t value) const C4STL_NOEXCEPT override;
+            virtual float GetCDF(int32_t value) const C4STL_NOEXCEPT override;
+
+        private:
+            inline static uint32_t BinomialCoefficient(uint32_t n, uint32_t k) C4STL_NOEXCEPT {
+                double res = 1.0;
+
+                for(uint32_t i = 0; i <= k; i++) {
+                    res = res * (n - k + i) / i;
+                }
+
+                return static_cast<uint32_t>(res + 0.01);
+            }
+
 		private:
 			int m_NumberOfTrys;
 			float m_Probability;
@@ -99,6 +119,9 @@ inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { retu
 			virtual int32_t Random() const C4STL_NOEXCEPT override;
 			virtual float Probability(int32_t occurences) const C4STL_NOEXCEPT override;
 
+            virtual float GetPDF(int32_t value) const C4STL_NOEXCEPT override;
+            virtual float GetCDF(int32_t value) const C4STL_NOEXCEPT override;
+
 		private:
 			float m_Lambda;
 		};
@@ -113,6 +136,9 @@ inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { retu
 
 			virtual float Random() const C4STL_NOEXCEPT override;
 			virtual float Probability(float x) const C4STL_NOEXCEPT override;
+
+            virtual float GetPDF(float value) const C4STL_NOEXCEPT override;
+            virtual float GetCDF(float value) const C4STL_NOEXCEPT override;
 
 		private:
 			float m_Lambda;
@@ -129,6 +155,9 @@ inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { retu
 			virtual float Random() const C4STL_NOEXCEPT override;
 			virtual float Probability(float x) const C4STL_NOEXCEPT override;
 
+            virtual float GetPDF(float value) const C4STL_NOEXCEPT override;
+            virtual float GetCDF(float value) const C4STL_NOEXCEPT override;
+
 		private:
 			float m_Mean;
 			float m_StandardDeviation;
@@ -144,6 +173,9 @@ inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { retu
 
 			virtual float Random() const C4STL_NOEXCEPT override;
 			virtual float Probability(float x) const C4STL_NOEXCEPT override;
+
+            virtual float GetPDF(float value) const C4STL_NOEXCEPT override;
+            virtual float GetCDF(float value) const C4STL_NOEXCEPT override;
 
 		private:
 			float m_Mean;
@@ -162,6 +194,9 @@ inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { retu
 			virtual uint32_t Random() const C4STL_NOEXCEPT override;
 			virtual float Probability(uint32_t x = 1) const C4STL_NOEXCEPT override;
 
+            virtual float GetPDF(uint32_t value) const C4STL_NOEXCEPT override;
+            virtual float GetCDF(uint32_t value) const C4STL_NOEXCEPT override;
+
 		private:
 			float m_Probability;
 		};
@@ -176,6 +211,9 @@ inline virtual DistributionClass GetClass() const C4STL_NOEXCEPT override { retu
 
 			virtual float Random() const C4STL_NOEXCEPT override;
 			virtual float Probability(float x) const C4STL_NOEXCEPT override;
+
+            virtual float GetPDF(float value) const C4STL_NOEXCEPT override;
+            virtual float GetCDF(float value) const C4STL_NOEXCEPT override;
 
 		private:
 			float m_Mean;

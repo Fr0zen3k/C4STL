@@ -27,3 +27,4 @@ target_link_libraries(C4STL PUBLIC LinkCL)
 target_include_directories(C4STL PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/C4STL/src")
 
 target_compile_definitions(C4STL PRIVATE __C4STL_BUILD)
+target_compile_definitions(C4STL PUBLIC _USE_MATH_DEFINES)
